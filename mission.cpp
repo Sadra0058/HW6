@@ -7,6 +7,7 @@ Mission::Mission(int start_timestamp_, int end_timestamp_, int reward, int missi
     set_mission_time(start_timestamp_, end_timestamp_);
     set_mission_reward(reward);
     set_mission_id(mission_id_);
+    complete = false;
 }
 
 void Mission::set_mission_time(int start_timestamp_, int end_timestamp_)
