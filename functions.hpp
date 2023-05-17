@@ -31,3 +31,4 @@ void add_count_mission(vector<Mission *> &missions, vector<int> inputs);
 void assign_mission(vector<Mission*> &missions, vector<Driver> &drivers, vector<int> inputs);
 void init_new_travel(vector<Driver> &drivers, int driver_id, int start_timestamp, int end_timestamp, int distance);
 void record_ride(vector<Driver> &drivers, vector <int> input);
+void show_missions_status(vector<Driver> &drivers, vector<int> input);

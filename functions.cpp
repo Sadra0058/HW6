@@ -144,12 +144,14 @@ void print_completed_missions(Driver &driver)
 {
     vector<map<string, string>> temp = driver.get_completed_missions();
     cout << "completed missions for driver " << driver.get_driver_id() << ':' << endl;
-    for (int i = 0; i < temp.size(); i++)
+    for (int i = 0, ent = 1; i < temp.size(); i++, ent++)
     {
         cout << "mission " << temp[i]["mission"] << ':' << endl
              << "start timestamp: " << temp[i]["start timestamp"] << endl
              << "end timestamp: " << temp[i]["end timestamp"] << endl
              << "reward: " << temp[i]["reward"] << endl;
+        if (ent < temp.size())
+            cout << endl;
     }
     driver.clear_completed_missions();
 }
@@ -161,7 +163,7 @@ void record_ride(vector<Driver> &drivers, vector<int> input)
         init_new_travel(drivers, input[2], input[0], input[1], input[3]);
         Driver *target_driver = find_driver_by_id(drivers, input[2]);
 
-        if (!target_driver->is_a_mission_completed())
+        if(!target_driver->is_a_mission_completed())
             target_driver->clear_last_travel();
 
         print_completed_missions(*target_driver);
@@ -173,8 +175,29 @@ void record_ride(vector<Driver> &drivers, vector<int> input)
     }
 }
 
-void show_missions_status(int id)
+void print_all_missions(Driver &driver)
 {
-
+    vector<map<string, string>> temp = driver.get_all_missions();
+    cout << "missions status for driver " << driver.get_driver_id() << ':' << endl;
+    for (int i = 0, ent = 1; i < temp.size(); i++, ent++)
+    {
+        cout << "mission " << temp[i]["mission"] << ':' << endl
+             << "start timestamp: " << temp[i]["start timestamp"] << endl
+             << "end timestamp: " << temp[i]["end timestamp"] << endl
+             << "reward: " << temp[i]["reward"] << endl
+             << "status: " << temp[i]["status"] << endl;
+        if (ent < temp.size())
+            cout << endl;
+    }
 }
 
+void show_missions_status(vector<Driver> &drivers, vector<int> input)
+{
+    Driver *target_driver = find_driver_by_id(drivers, input[0]);
+    if (target_driver == NULL)
+    {
+        cout << "DRIVER_MISSION_NOT_FOUND" << endl;
+        return;
+    }
+    print_all_missions(*target_driver);
+}

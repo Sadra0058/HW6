@@ -22,7 +22,7 @@ int CountMission::calculate_total_travels(vector<Travel> & travels)
     int counter = 0;
     for (int i = 0 ; i < travels.size() ; i++)
     {
-        if (travels[i].get_start_timestamp() >= start_timestamp && travels[i].get_end_timestamp() <=  end_timestamp)
+        if (travels[i].get_start_timestamp() < end_timestamp && travels[i].get_end_timestamp() >  start_timestamp)
         {
             counter++;
         }
@@ -37,4 +37,10 @@ bool CountMission::is_mission_complete(vector<Travel> & travels)
         complete = true;
     }
     return complete;
+}
+
+Mission * CountMission::copy_mission()
+{
+    CountMission * temp = new CountMission(*this);
+    return temp;
 }

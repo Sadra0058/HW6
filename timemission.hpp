@@ -15,4 +15,5 @@ private:
 public:
     TimeMission(int target_time_, int start_timestamp_, int end_timestamp_, int reward, int mission_id_);
     bool is_mission_complete(vector<Travel> & travels) override;
+    Mission * copy_mission() override;
 };

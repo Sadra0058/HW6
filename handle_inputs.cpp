@@ -8,7 +8,8 @@ enum
     ADD_DISTANCE_MISSION,
     ADD_COUNT_MISSION,
     ASSIGN_MISSION,
-    RECORD_RIDE
+    RECORD_RIDE,
+    SHOW_MISSIONS_STATUS
 };
 
 int read_command_convert_to_int(string input)
@@ -23,6 +24,8 @@ int read_command_convert_to_int(string input)
         return ASSIGN_MISSION;
     if (input == "record_ride")
         return RECORD_RIDE;
+    if (input == "show_missions_status")
+        return SHOW_MISSIONS_STATUS;
     return -1;
 }
 
@@ -44,6 +47,9 @@ void command_manager(int command, vector<Mission *> &missions, vector<Driver> &d
         break;
     case RECORD_RIDE:
         record_ride(drivers, inputs);
+        break;
+    case SHOW_MISSIONS_STATUS:
+        show_missions_status(drivers , inputs);
         break;
     }
 }

@@ -38,7 +38,7 @@ map<string, string> Mission::get_mission_completed_info()
     map<string, string> temp;
     temp["mission"] = to_string(mission_id);
     temp["start timestamp"] = to_string(start_timestamp);
-    temp["end timestamp"] = to_string(end_timestamp);
+    temp["end timestamp"] = to_string(end);
     temp["reward"] = to_string(reward_amount);
     return temp;
 }

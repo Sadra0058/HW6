@@ -38,3 +38,9 @@ bool TimeMission::is_mission_complete(vector<Travel> &travels)//
     }
     return complete;
 }
+
+Mission * TimeMission::copy_mission()
+{
+    TimeMission * temp = new TimeMission(*this);
+    return temp;
+}

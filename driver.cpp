@@ -56,3 +56,9 @@ vector<map<string, string>> Driver::get_all_missions()
     sortByStartTime(temp);
     return temp;
 }
+
+void Driver::set_new_mission(Mission * mission)
+{
+    Mission * temp = mission->copy_mission();
+    missions.push_back(temp);
+}
