@@ -1,5 +1,3 @@
-#pragma once
-
 #include "mission.hpp"
 
 using namespace std;
@@ -33,8 +31,3 @@ void Mission::set_mission_reward(int reward)
     }
     reward_amount = reward;
 }
-
-void Mission::set_mission_id(int mission_id_)
-{
-    mission_id = mission_id_;
-};

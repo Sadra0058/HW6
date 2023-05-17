@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "stdexcept": "cpp",
+        "cmath": "cpp",
+        "string": "cpp",
+        "iostream": "cpp",
+        "set": "cpp",
+        "ostream": "cpp"
+    }
+}
