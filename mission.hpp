@@ -38,4 +38,6 @@ public:
 
     int get_mission_id() {return mission_id;};
     bool get_complete_status() {return complete;};
+    map<string , string> get_mission_completed_info();
+    map<string , string> get_mission_info();
 };

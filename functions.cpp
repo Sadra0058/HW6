@@ -140,28 +140,41 @@ void init_new_travel(vector<Driver> &drivers, int driver_id, int start_timestamp
     target_driver->set_new_travel(travel);
 }
 
+void print_completed_missions(Driver &driver)
+{
+    vector<map<string, string>> temp = driver.get_completed_missions();
+    cout << "completed missions for driver " << driver.get_driver_id() << ':' << endl;
+    for (int i = 0; i < temp.size(); i++)
+    {
+        cout << "mission " << temp[i]["mission"] << ':' << endl
+             << "start timestamp: " << temp[i]["start timestamp"] << endl
+             << "end timestamp: " << temp[i]["end timestamp"] << endl
+             << "reward: " << temp[i]["reward"] << endl;
+    }
+    driver.clear_completed_missions();
+}
+
 void record_ride(vector<Driver> &drivers, vector<int> input)
 {
     try
     {
         init_new_travel(drivers, input[2], input[0], input[1], input[3]);
         Driver *target_driver = find_driver_by_id(drivers, input[2]);
+
         if (!target_driver->is_a_mission_completed())
-        {
             target_driver->clear_last_travel();
-            cout << "nothing happend" << endl;
-            return;
-        }
-        else
-        {
-            cout << "some missions completed" << endl;
-            return;
-        }
+
+        print_completed_missions(*target_driver);
     }
     catch (const runtime_error &e)
     {
         cerr << "Error: " << e.what() << endl;
         return;
     }
+}
+
+void show_missions_status(int id)
+{
+
 }
 

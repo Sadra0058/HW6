@@ -32,3 +32,23 @@ void Mission::set_mission_reward(int reward)
     }
     reward_amount = reward;
 }
+
+map<string, string> Mission::get_mission_completed_info()
+{
+    map<string, string> temp;
+    temp["mission"] = to_string(mission_id);
+    temp["start timestamp"] = to_string(start_timestamp);
+    temp["end timestamp"] = to_string(end_timestamp);
+    temp["reward"] = to_string(reward_amount);
+    return temp;
+}
+
+map<string, string> Mission::get_mission_info()
+{
+    map<string, string> temp = get_mission_completed_info();
+    if (!complete)
+        temp["status"] = "ongoing";
+    else
+        temp["status"] = "completed";
+    return temp;
+}
