@@ -1,0 +1,9 @@
+add_distance_mission 1 1000 2000 100 1
+assign_mission 1 1
+record_ride 1000 2000 1 100
+assign_mission 1 2
+record_ride 1000 2000 2 100
+
+
+
+

@@ -1,5 +1,3 @@
-#pragma once
-
 #include "mission.hpp"
 
 using namespace std;
@@ -9,6 +7,7 @@ Mission::Mission(int start_timestamp_, int end_timestamp_, int reward, int missi
     set_mission_time(start_timestamp_, end_timestamp_);
     set_mission_reward(reward);
     set_mission_id(mission_id_);
+    complete = false;
 }
 
 void Mission::set_mission_time(int start_timestamp_, int end_timestamp_)
@@ -34,7 +33,22 @@ void Mission::set_mission_reward(int reward)
     reward_amount = reward;
 }
 
-void Mission::set_mission_id(int mission_id_)
+map<string, string> Mission::get_mission_completed_info()
 {
-    mission_id = mission_id_;
-};
+    map<string, string> temp;
+    temp["mission"] = to_string(mission_id);
+    temp["start timestamp"] = to_string(start_timestamp);
+    temp["end timestamp"] = to_string(end);
+    temp["reward"] = to_string(reward_amount);
+    return temp;
+}
+
+map<string, string> Mission::get_mission_info()
+{
+    map<string, string> temp = get_mission_completed_info();
+    if (!complete)
+        temp["status"] = "ongoing";
+    else
+        temp["status"] = "completed";
+    return temp;
+}

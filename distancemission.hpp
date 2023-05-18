@@ -8,20 +8,16 @@ class DistanceMission : public Mission
 {
 private:
     int target_distance;
+    int total_distance = 0;
 
-    void set_target_distance(int target_distance_)
-    {
-        if (target_distance_ < 0)
-        {
-            throw runtime_error("INVALID_ARGUMENTS");
-        }
-        target_distance = target_distance_;
-    }
+    void set_target_distance(int target_distance_);
+    int calculate_total_distance(vector<Travel> & travels);
 
 public:
-    DistanceMission(int target_distance_, int start_timestamp_, int end_timestamp_, int reward, int mission_id_)
-        : Mission(start_timestamp_, end_timestamp_, reward, mission_id_)
-    {
-        set_target_distance(target_distance_);
-    }
+    DistanceMission(int target_distance_, int start_timestamp_, int end_timestamp_, int reward, int mission_id_);
+
+    bool is_mission_complete(Travel travel) override ;
+    Mission * copy_mission() override;
 };
+
+
