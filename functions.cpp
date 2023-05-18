@@ -26,12 +26,12 @@ Mission *find_mission_by_id(vector<Mission *> &missions, int id)
     return NULL;
 }
 
-Driver *find_driver_by_id(vector<Driver> &drivers, int id)
+Driver *find_driver_by_id(vector<Driver *> &drivers, int id)
 {
     for (int i = 0; i < drivers.size(); i++)
     {
-        if (drivers[i].get_driver_id() == id)
-            return &drivers[i];
+        if (drivers[i]->get_driver_id() == id)
+            return drivers[i];
     }
     return NULL;
 }
@@ -100,7 +100,7 @@ void add_count_mission(vector<Mission *> &missions, vector<int> inputs)
     }
 }
 
-void assign_mission(vector<Mission *> &missions, vector<Driver> &drivers, vector<int> inputs) // long function
+void assign_mission(vector<Mission *> &missions, vector<Driver *> &drivers, vector<int> inputs) // long function
 {
     Mission *target_mission = find_mission_by_id(missions, inputs[0]);
     if (target_mission == NULL)
@@ -111,9 +111,8 @@ void assign_mission(vector<Mission *> &missions, vector<Driver> &drivers, vector
     Driver *target_driver = find_driver_by_id(drivers, inputs[1]);
     if (target_driver == NULL)
     {
-        Driver driver;
-        driver.set_driver_id(inputs[1]);
-        driver.set_new_mission(target_mission);
+        Driver * driver = new Driver(inputs[1]);
+        driver->set_new_mission(target_mission);
         drivers.push_back(driver);
     }
     else
@@ -129,7 +128,7 @@ void assign_mission(vector<Mission *> &missions, vector<Driver> &drivers, vector
     cout << "OK" << endl;
 }
 
-Travel creat_new_travel(vector<Driver> &drivers, int driver_id, int start_timestamp, int end_timestamp, int distance)
+Travel creat_new_travel(vector<Driver *> &drivers, int driver_id, int start_timestamp, int end_timestamp, int distance)
 {
     Driver *target_driver = find_driver_by_id(drivers, driver_id);
     if (target_driver == NULL)
@@ -155,7 +154,7 @@ void print_completed_missions(Driver &driver)
     driver.clear_completed_missions();
 }
 
-void record_ride(vector<Driver> &drivers, vector<int> input)
+void record_ride(vector<Driver *> &drivers, vector<int> input)
 {
     try
     {
@@ -189,13 +188,25 @@ void print_all_missions(Driver &driver)
     }
 }
 
-void show_missions_status(vector<Driver> &drivers, vector<int> input)
+void show_missions_status(vector<Driver *> &drivers, vector<int> input)
 {
     Driver *target_driver = find_driver_by_id(drivers, input[0]);
     if (target_driver == NULL)
     {
-        cout << "DRIVER_MISSION_NOT_FOUND" << endl;
+        cout << "MISSION_NOT_FOUND" << endl;
         return;
     }
     print_all_missions(*target_driver);
+}
+
+void free_allocated_memory(vector <Mission *> & missions , vector <Driver *> & drivers)
+{
+    for (int i = 0 ; i < drivers.size() ; i++)
+    {
+        delete drivers[i];
+    }
+    for (int i = 0 ; i < missions.size() ; i++)
+    {
+        delete missions[i];
+    }
 }

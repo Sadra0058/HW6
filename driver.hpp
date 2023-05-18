@@ -26,12 +26,12 @@ private:
 
 public:
     ~Driver();
-
+    Driver(int driver_id_){set_driver_id(driver_id_);};
     int get_driver_id() { return driver_id; };
     vector<map<string, string>> get_completed_missions();
     vector<map<string, string>> get_all_missions();
 
-    void set_new_mission(Mission * mission);//
+    void set_new_mission(Mission * mission);
     void set_driver_id(int driver_id_) { driver_id = driver_id_; };
 
     void clear_completed_missions() { completed_missions.resize(0); };

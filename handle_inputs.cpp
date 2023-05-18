@@ -29,7 +29,7 @@ int read_command_convert_to_int(string input)
     return -1;
 }
 
-void command_manager(int command, vector<Mission *> &missions, vector<Driver> &drivers, vector<int> inputs)
+void command_manager(int command, vector<Mission *> &missions, vector<Driver *> &drivers, vector<int> inputs)
 {
     switch (command)
     {
@@ -74,7 +74,7 @@ void Input::input_clear()
     value.clear();
 }
 
-void Input::process(vector<Mission *> &missions, vector<Driver> &drivers)
+void Input::process(vector<Mission *> &missions, vector<Driver *> &drivers)
 {
     while (set_input())
     {
@@ -89,9 +89,9 @@ void Input::process(vector<Mission *> &missions, vector<Driver> &drivers)
 int main()
 {
     vector<Mission *> missions;
-    vector<Driver> drivers;
+    vector<Driver *> drivers;
 
     Input input;
     input.process(missions, drivers);
-    //cerr << "end of main" << endl;
+    free_allocated_memory(missions , drivers);
 }
