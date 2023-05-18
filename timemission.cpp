@@ -20,20 +20,12 @@ TimeMission::TimeMission(int target_time_, int start_timestamp_, int end_timesta
 }
 
 //mission complete methods
-int TimeMission::calculate_total_min(vector<Travel> &travels)
+bool TimeMission::is_mission_complete(Travel travel)//
 {
-    int total_min = 0;
-    for (int i = 0; i < travels.size(); i++)
+    total_time += travel.get_total_min(start_timestamp , end_timestamp);
+    if (total_time >= target_time)
     {
-        total_min += travels[i].get_total_min(start_timestamp , end_timestamp); 
-    }
-    return total_min;
-}
-
-bool TimeMission::is_mission_complete(vector<Travel> &travels)//
-{
-    if (calculate_total_min(travels) >= target_time)
-    {
+        end = end_timestamp;
         complete = true;
     }
     return complete;

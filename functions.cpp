@@ -58,7 +58,7 @@ void add_time_mission(vector<Mission *> &missions, vector<int> inputs)
     }
     catch (const runtime_error &e)
     {
-        cerr << "Error: " << e.what() << endl;
+        cout << e.what() << endl;
     }
 }
 
@@ -77,7 +77,7 @@ void add_distance_mission(vector<Mission *> &missions, vector<int> inputs)
     }
     catch (const runtime_error &e)
     {
-        cerr << "Error: " << e.what() << endl;
+        cout << e.what() << endl;
     }
 }
 
@@ -96,7 +96,7 @@ void add_count_mission(vector<Mission *> &missions, vector<int> inputs)
     }
     catch (const runtime_error &e)
     {
-        cerr << "Error: " << e.what() << endl;
+        cout << e.what() << endl;
     }
 }
 
@@ -129,15 +129,14 @@ void assign_mission(vector<Mission *> &missions, vector<Driver> &drivers, vector
     cout << "OK" << endl;
 }
 
-void init_new_travel(vector<Driver> &drivers, int driver_id, int start_timestamp, int end_timestamp, int distance)
+Travel creat_new_travel(vector<Driver> &drivers, int driver_id, int start_timestamp, int end_timestamp, int distance)
 {
     Driver *target_driver = find_driver_by_id(drivers, driver_id);
     if (target_driver == NULL)
     {
         throw runtime_error("DRIVER NOT FOUND");
     }
-    Travel travel(start_timestamp, end_timestamp, distance);
-    target_driver->set_new_travel(travel);
+    return Travel(start_timestamp, end_timestamp, distance);
 }
 
 void print_completed_missions(Driver &driver)
@@ -160,17 +159,16 @@ void record_ride(vector<Driver> &drivers, vector<int> input)
 {
     try
     {
-        init_new_travel(drivers, input[2], input[0], input[1], input[3]);
+        Travel travel = creat_new_travel(drivers, input[2], input[0], input[1], input[3]);
         Driver *target_driver = find_driver_by_id(drivers, input[2]);
 
-        if(!target_driver->is_a_mission_completed())
-            target_driver->clear_last_travel();
+        target_driver->check_missions_completed(travel);
 
         print_completed_missions(*target_driver);
     }
     catch (const runtime_error &e)
     {
-        cerr << "Error: " << e.what() << endl;
+        cout << e.what() << endl;
         return;
     }
 }

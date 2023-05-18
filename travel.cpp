@@ -8,11 +8,11 @@ void Travel::set_travel_time(int start_timestamp_ , int end_timestamp_)
 {
     if (end_timestamp_ <= start_timestamp_)
     {
-        throw runtime_error("ARGUMENTS_INVALID");
+        throw runtime_error("INVALID_ARGUMENTS");
     }
     if (end_timestamp_ < 0 || start_timestamp_ < 0)
     {
-        throw runtime_error("ARGUMENTS_INVALID");
+        throw runtime_error("INVALID_ARGUMENTS");
     }
     start_timestamp = start_timestamp_;
     end_timestamp = end_timestamp_;
@@ -22,7 +22,7 @@ void Travel::set_travel_distance(int distance_)
 {
     if (distance_ < 0)
     {
-        throw runtime_error("ARGUMENTS_INVALID");
+        throw runtime_error("INVALID_ARGUMENTS");
     }
     distance = distance_;
 }

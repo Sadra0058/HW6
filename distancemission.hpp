@@ -16,7 +16,7 @@ private:
 public:
     DistanceMission(int target_distance_, int start_timestamp_, int end_timestamp_, int reward, int mission_id_);
 
-    bool is_mission_complete(vector<Travel> & travels) override ;
+    bool is_mission_complete(Travel travel) override ;
     Mission * copy_mission() override;
 };
 

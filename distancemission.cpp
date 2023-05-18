@@ -18,14 +18,14 @@ DistanceMission::DistanceMission(int target_distance_, int start_timestamp_, int
 }
 
 // complete methods
-bool DistanceMission::is_mission_complete(vector<Travel> &travels)
+bool DistanceMission::is_mission_complete(Travel travel)
 {
-    if (travels[travels.size() - 1].get_start_timestamp() >= start_timestamp && travels[travels.size() - 1].get_end_timestamp() <= end_timestamp)
+    if (travel.get_start_timestamp() >= start_timestamp && travel.get_end_timestamp() <= end_timestamp)
     {
-        total_distance += travels[travels.size() - 1].get_distance();
+        total_distance += travel.get_distance();
         if (total_distance >= target_distance)
         {
-            end = travels[travels.size() - 1].get_end_timestamp();
+            end = travel.get_end_timestamp();
             complete = true;
             return true;
         }

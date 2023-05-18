@@ -17,24 +17,16 @@ CountMission::CountMission(int target_number_, int start_timestamp_, int end_tim
     set_target_number(target_number_);
 }
 
-int CountMission::calculate_total_travels(vector<Travel> & travels)
+bool CountMission::is_mission_complete(Travel travel)
 {
-    int counter = 0;
-    for (int i = 0 ; i < travels.size() ; i++)
+    if(travel.get_start_timestamp() >= start_timestamp && travel.get_end_timestamp() <=  end_timestamp)
     {
-        if (travels[i].get_start_timestamp() < end_timestamp && travels[i].get_end_timestamp() >  start_timestamp)
+        total_number ++;
+        if(total_number >= target_number)
         {
-            counter++;
+            end = travel.get_end_timestamp();
+            complete = true;
         }
-    }
-    return counter;
-}
-
-bool CountMission::is_mission_complete(vector<Travel> & travels)
-{
-    if (calculate_total_travels(travels) >= target_number)
-    {
-        complete = true;
     }
     return complete;
 }

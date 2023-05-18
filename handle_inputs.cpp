@@ -93,4 +93,5 @@ int main()
 
     Input input;
     input.process(missions, drivers);
+    //cerr << "end of main" << endl;
 }

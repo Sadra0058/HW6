@@ -41,6 +41,6 @@ public:
     map<string , string> get_mission_completed_info();
     map<string , string> get_mission_info();
 
-    virtual bool is_mission_complete(vector<Travel> & travels) = 0;
+    virtual bool is_mission_complete(Travel travel) = 0;
     virtual Mission * copy_mission() = 0;
 };

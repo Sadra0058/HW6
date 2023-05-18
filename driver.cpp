@@ -13,21 +13,16 @@ bool Driver::is_mission_repeated(Mission *mission)
     return false;
 }
 
-bool Driver::is_a_mission_completed()
+void Driver::check_missions_completed(Travel travel)
 {
-    bool result = false;
     for (int i = 0; i < missions.size(); i++)
     {
         if (!missions[i]->get_complete_status())
         {
-            if (missions[i]->is_mission_complete(travels))
-            {
+            if (missions[i]->is_mission_complete(travel))
                 completed_missions.push_back(missions[i]->get_mission_completed_info());
-                result = true;
-            }
         }
     }
-    return result;
 }
 
 bool compareByStartTime(const map<string, string>& map1, const map<string, string>& map2)
@@ -61,4 +56,13 @@ void Driver::set_new_mission(Mission * mission)
 {
     Mission * temp = mission->copy_mission();
     missions.push_back(temp);
+}
+
+Driver::~Driver()
+{
+    //cerr << "disteractor called";
+    for (int i = 0 ; i < missions.size() ; i++)
+    {
+        delete missions[i];
+    }
 }
